@@ -3,10 +3,10 @@ sudo yum update -y
 # sudo yum install nc -y
 # sudo amazon-linux-extras install epel -y
 # sudo yum install erlang -y
-wget https://github.com/rabbitmq/erlang-rpm/releases/download/v23.2.1/erlang-23.2.1-1.el7.x86_64.rpm
-yum localinstall erlang-23.2.1-1.el7.x86_64.rpm -y
-wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.10.0/rabbitmq-server-3.10.0-1.el8.noarch.rpm
-sudo rpm -Uvh rabbitmq-server-3.10.0-1.el8.noarch.rpm
+wget https://github.com/rabbitmq/erlang-rpm/releases/download/v26.0.2/erlang-26.0.2-1.amzn2023.aarch64.rpm
+yum localinstall erlang-26.0.2-1.amzn2023.aarch64.rpm -y
+wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.12.4/rabbitmq-server-3.12.4-1.el8.noarch.rpm
+sudo rpm -Uvh rabbitmq-server-3.12.4-1.el8.noarch.rpm
 systemctl enable --now rabbitmq-server.service
 sudo rabbitmqctl start_app
 sudo rabbitmqctl stop_app
