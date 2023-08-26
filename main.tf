@@ -93,7 +93,7 @@ data "aws_ami" "amazon-linux-2" {
   }
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm*"]
+    values = ["amzn2-ami-kernel-*-arm64-*"]
   }
   owners = ["amazon"]
 }
