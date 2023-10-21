@@ -3,10 +3,29 @@ sudo yum update -y
 # sudo yum install nc -y
 # sudo amazon-linux-extras install epel -y
 # sudo yum install erlang -y
-wget https://github.com/rabbitmq/erlang-rpm/releases/download/v26.0.2/erlang-26.0.2-1.amzn2023.aarch64.rpm
-yum localinstall erlang-26.0.2-1.amzn2023.aarch64.rpm -y
-wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.12.4/rabbitmq-server-3.12.4-1.el8.noarch.rpm
-sudo rpm -Uvh rabbitmq-server-3.12.4-1.el8.noarch.rpm
+
+#old
+# wget https://github.com/rabbitmq/erlang-rpm/releases/download/v26.0.2/erlang-26.0.2-1.amzn2023.aarch64.rpm
+# yum localinstall erlang-26.0.2-1.amzn2023.aarch64.rpm -y
+# wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.12.4/rabbitmq-server-3.12.4-1.el8.noarch.rpm
+# sudo rpm -Uvh rabbitmq-server-3.12.4-1.el8.noarch.rpm
+
+#new
+yum install ncurses-compat-libs -y # erlang lib dep
+yum install socat -y
+yum install docker -y # build rpm by with docker
+sudo service start docker # start docker daemon
+#build eralng otp dep with docker(build within the host will meet systemd check related error)
+wget https://github.com/rabbitmq/erlang-rpm/archive/refs/tags/v23.2.7.tar.gz
+tar -xzvf v23.2.7.tar.gz
+cd docker
+./build-image-and-rpm.sh 7 --no-cache
+# install erlang
+rpm -ivh ./build-dir-7/RPMS/aarch64/erlang-23.2.7-1.el7.aarch64.rpm
+#download and install rabbitmq-server
+wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.8.6/rabbitmq-server-3.8.6-1.el7.noarch.rpm
+rpm -ivh rabbitmq-server-3.8.6-1.el7.noarch.rpm
+
 systemctl enable --now rabbitmq-server.service
 sudo rabbitmqctl start_app
 sudo rabbitmqctl stop_app
