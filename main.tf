@@ -35,7 +35,7 @@ resource "aws_ssm_parameter" "rabbit_prod_username" {
   name        = "/${var.environment_name}/rabbit/PROD_USERNAME"
   description = "Rabbit prod Username"
   type        = "String"
-  value       = "admin"
+  value       = "prod"
 
 }
 
