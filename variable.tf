@@ -141,7 +141,7 @@ variable "rabbit_sg_name" {
 variable "instance_type" {
   description = "The type of instance to start"
   type        = string
-  default     = "t3a.medium"
+  default     = "t4g.medium"
 }
 
 variable "disable_api_termination" {
@@ -236,13 +236,13 @@ variable "ssm_kms_key_id" {
 
 variable environment_name {
   type        = string
-  default     = "dev"
+  default     = "prod"
   description = "Environment name"
 }
 
 variable region {
   type        = string
-  default     = "us-east-1"
+  default     = "af-south-1"
   description = "Region where resources will deploy"
 }
 variable "ami_id" {
